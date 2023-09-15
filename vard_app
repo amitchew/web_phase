@@ -1,0 +1,49 @@
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
+const BlogCard = ({ blogPost }) => {
+  const [showSummary, setShowSummary] = useState(false);
+
+  useEffect(() => {
+    setShowSummary(!!blogPost.summary);
+  }, [blogPost.summary]);
+
+  return (
+    <div className="card">
+      <Link to={`/blog/${blogPost.id}`}>
+        <h2>{blogPost.title}</h2>
+      </Link>
+      <p>
+        <strong>Author:</strong> {blogPost.author}
+      </p>
+      <p>
+        <strong>Date:</strong> {blogPost.date}
+      </p>
+      {showSummary && (
+        <p>
+          <strong>Summary:</strong> {blogPost.summary}
+        </p>
+      )}
+    </div>
+  );
+};
+
+// export default BlogCard;
+
+const blogPost = {
+  id: 1,
+  title: "My First Blog Post in A2SV",
+  author: "Abamitchew Tomas",
+  date: "2023-09-15",
+  summary: "This is a summary of my first blog post."
+};
+
+export const App = () => {
+  return (
+    <div>
+      <BlogCard blogPost={blogPost} />
+    </div>
+  );
+};
+
+export default App;
